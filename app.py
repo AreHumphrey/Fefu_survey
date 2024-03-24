@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, jsonify, url_for
 import os
 from flask_sqlalchemy import SQLAlchemy
-from flask import redirect
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
