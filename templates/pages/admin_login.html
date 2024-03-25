@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
     <title>Admin Login</title>
 </head>
 <body>
-    <h2>Admin Login</h2>
-    <form method="post" action="/admin">
-        <label for="password">Password: </label>
-        <input type="password" id="password" name="password">
-        <input type="submit" value="Login">
-    </form>
+    <div class="admin-login-container">
+        <h2>Панель администратора</h2>
+        <form method="post" action="/admin">
+            <label class="admin-text" for="password">Введите пароль: </label><br>
+            <input class="admin-password" type="password" id="password" name="password"><br>
+            <input class="admin-login-button" type="submit" value="Войти">
+        </form>
+    </div>
 </body>
 </html>
+

@@ -70,7 +70,8 @@ def admin_panel():
     else:
         sorted_students = students
 
-    return render_template('pages/admin_panel.html', students=students, sorted_students=sorted_students, group_options=group_options)
+    return render_template('pages/admin_panel.html', students=students, sorted_students=sorted_students,
+                           group_options=group_options)
 
 
 if __name__ == '__main__':
