@@ -1,0 +1,94 @@
+body {
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(270deg, #F68F92, #9D5F6C, #422C43, #39273F);
+    background-size: 800% 800%;
+    -webkit-animation: AnimationName 30s ease infinite;
+    -moz-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+}
+
+
+@-webkit-keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@-moz-keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@-o-keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+.admin-container {
+    background-color: #FFFFFF;
+    padding: 20px;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    border: 2px solid #422C43;
+    border-radius: 10px;
+}
+
+.student-info {
+    margin-top: 10px;
+}
+
+.student-heading {
+    font-weight: bold;
+}
+
+.student-line {
+    border-top: 1px solid #422C43;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+.sort-button{
+    width: 20%;
+    background-color: #9D5F6C;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #FFFFFF;
+}
