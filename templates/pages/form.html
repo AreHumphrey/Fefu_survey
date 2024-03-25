@@ -1,22 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <title>Форма заполнения</title>
-    <style>
 
-        .form-container {
-            background-color: white;
-            padding: 20px;
-            border: 1px solid #ccc;
-            width: 50%;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
 <div class="form-container">
-    <h2>Форма заполнения информации</h2>
+    <h2 style="color: #39273F">Форма заполнения информации</h2>
     <form id="submissionForm" method="post" action="{{ url_for('submit_form') }}" enctype="multipart/form-data">
         <label for="fullname">ФИО:</label><br>
         <input type="text" id="fullname" name="fullname"><br><br>
@@ -30,9 +21,10 @@
         <textarea id="description" name="description"></textarea><br><br>
         <label for="attachment">Прикрепить файл:</label><br>
         <input type="file" id="attachment" name="attachment"><br><br>
-        <input type="submit" value="Отправить">
+        <input style="color: white" type="submit" value="Отправить">
     </form>
 </div>
+
 
 <script>
 
@@ -52,9 +44,6 @@
                 console.error('Form submission error:', error);
             });
     });
-
-
 </script>
-
 </body>
 </html>

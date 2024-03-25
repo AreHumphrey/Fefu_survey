@@ -5,7 +5,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: linear-gradient(270deg, #F68F92, #9D5F6C, #422C43,  #39273F);
+    background-image: linear-gradient(270deg, #F68F92, #9D5F6C, #422C43, #39273F);
     background-size: 800% 800%;
     -webkit-animation: AnimationName 30s ease infinite;
     -moz-animation: AnimationName 30s ease infinite;
@@ -112,6 +112,80 @@ a, a:hover {
     line-height: 66px;
     color: #FFFFFF;
 }
+
+.form-container {
+    background-color: #FFFFFF;
+    padding: 20px;
+    width: 80%;
+    text-align: center;
+}
+
+.form-container input[type="text"],
+.form-container input[type="number"],
+.form-container textarea,
+.form-container input[type="file"] {
+    width: 80%;
+    padding: 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #9D5F6C;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-container input[type="submit"] {
+    width: 80%;
+    background-color: #9D5F6C;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-container input[type="submit"]:hover {
+    background-color: #9D5F6C;
+}
+
+
+.form-container input[type="file"] {
+    width: 80%;
+    padding: 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #9D5F6C;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-container input[type="file"]:focus {
+    border: 2px solid #9D5F6C;
+}
+
+.form-container input[type="file"]::-webkit-file-upload-button {
+    background-color: #9D5F6C;
+    color: white;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.form-container input[type="text"]:focus,
+.form-container input[type="number"]:focus,
+.form-container textarea:focus,
+.form-container input[type="file"]:focus {
+    border: 2px solid #9D5F6C;
+    outline: none;
+}
+
+
+
+
+
+
+
 
 
 
