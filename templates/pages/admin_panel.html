@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+</head>
+<body>
+    <div class="admin-container">
+        <h2>Welcome to Admin Panel</h2>
+
+        <form method="POST">
+            <label for="group_name">Select Group:</label>
+            <select name="group_name" id="group_name">
+                <option value="All">All</option>
+                {% for group in group_options %}
+                    <option value="{{ group }}">{{ group }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Sort">
+        </form>
+
+        <h3>Sorted Students:</h3>
+        <ul>
+            {% for student in sorted_students %}
+                <li class="student-line">
+                    <div class="student-info">
+                        <p class="student-heading">Full Name:</p>
+                        <p>{{ student.fullname }}</p>
+                    </div>
+                    <div class="student-info">
+                        <p class="student-heading">Group Name:</p>
+                        <p>{{ student.group_name }}</p>
+                    </div>
+                    <div class="student-info">
+                        <p class="student-heading">Course:</p>
+                        <p>{{ student.course }}</p>
+                    </div>
+                    <div class="student-info">
+                        <p class="student-heading">Achievements:</p>
+                        <ul>
+                            {% for achievement in student.achievements %}
+                                <li>{{ achievement.achievement }} - {{ achievement.description }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

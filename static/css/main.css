@@ -180,6 +180,30 @@ a, a:hover {
     outline: none;
 }
 
+.admin-container {
+    background-color: #FFFFFF;
+    padding: 20px;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    border: 2px solid #000000;
+    border-radius: 10px;
+}
+
+.student-info {
+    margin-top: 10px;
+}
+
+.student-heading {
+    font-weight: bold;
+}
+
+.student-line {
+    border-top: 1px solid #000000;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
 
 
 

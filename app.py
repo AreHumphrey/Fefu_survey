@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, url_for
+from flask import Flask, render_template, request, jsonify, url_for, redirect
 import os
 from flask_sqlalchemy import SQLAlchemy
 
@@ -41,6 +41,36 @@ def submit_form():
     db.session.add(achievement)
     db.session.commit()
     return jsonify({'redirect': url_for('index')})
+
+
+@app.route('/admin', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'POST':
+        password = request.form['password']
+        if password == '1234':
+            return redirect(url_for('admin_panel'))
+        else:
+            return "Incorrect password. Access denied."
+    return render_template('pages/admin_login.html')
+
+
+@app.route('/admin-panel', methods=['GET', 'POST'])
+def admin_panel():
+    students = Students.query.all()
+
+    group_options = db.session.query(Students.group_name).distinct().all()
+    group_options = [group[0] for group in group_options]
+
+    if request.method == 'POST':
+        group_name = request.form['group_name']
+        if group_name != 'All':
+            sorted_students = Students.query.filter_by(group_name=group_name).all()
+        else:
+            sorted_students = students
+    else:
+        sorted_students = students
+
+    return render_template('pages/admin_panel.html', students=students, sorted_students=sorted_students, group_options=group_options)
 
 
 if __name__ == '__main__':
