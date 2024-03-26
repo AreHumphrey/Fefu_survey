@@ -2,22 +2,26 @@
 <html>
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+        .required {
+            color: red;
+        }
+    </style>
     <title>Форма заполнения</title>
-
 </head>
 <body>
 <div class="form-container">
     <h2 style="color: #39273F">Форма заполнения информации</h2>
     <form id="submissionForm" method="post" action="{{ url_for('submit_form') }}" enctype="multipart/form-data">
-        <label for="fullname">ФИО:</label><br>
-        <input type="text" id="fullname" name="fullname"><br><br>
-        <label for="group_name">Группа:</label><br>
-        <input type="text" id="group_name" name="group_name"><br><br>
-        <label for="course">Курс:</label><br>
-        <input type="number" id="course" name="course"><br><br>
-        <label for="achievement">Достижение:</label><br>
-        <input type="text" id="achievement" name="achievement"><br><br>
-        <label for="description">Описание достижения:</label><br>
+        <label for="fullname">ФИО:<span class="required">*</span></label><br>
+        <input type="text" id="fullname" name="fullname" required><br><br>
+        <label for="group_name">Группа:<span class="required">*</span></label><br>
+        <input type="text" id="group_name" name="group_name" required><br><br>
+        <label for="course">Курс:<span class="required">*</span></label><br>
+        <input type="number" id="course" name="course" required><br><br>
+        <label for="achievement">Достижение:<span class="required">*</span></label><br>
+        <input type="text" id="achievement" name="achievement" required><br><br>
+        <label for="description">Описание достижения:<span class="required">*</span></label><br>
         <textarea id="description" name="description"></textarea><br><br>
         <label for="attachment">Прикрепить файл:</label><br>
         <input type="file" id="attachment" name="attachment"><br><br>
@@ -25,24 +29,44 @@
     </form>
 </div>
 
-
 <script>
-
     document.getElementById("submissionForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-        fetch(this.action, {
-            method: this.method,
-            body: new FormData(this)
-        })
-            .then(function (response) {
-                return response.json();
+        let form = this;
+        let formInvalid = false;
+
+        form.querySelectorAll('input:required, textarea:required').forEach((input) => {
+            if (!input.value) {
+                formInvalid = true;
+                input.classList.add('invalid');
+            } else {
+                input.classList.remove('invalid');
+            }
+        });
+
+        if (formInvalid) {
+            event.preventDefault();
+        } else {
+            fetch(this.action, {
+                method: this.method,
+                body: new FormData(this)
             })
-            .then(function (data) {
-                window.location.href = data.redirect;
-            })
-            .catch(function (error) {
-                console.error('Form submission error:', error);
-            });
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    window.location.href = data.redirect;
+                })
+                .catch(function (error) {
+                    console.error('Form submission error:', error);
+                });
+        }
+    });
+    document.querySelectorAll('input:required, textarea:required').forEach((input) => {
+        input.addEventListener('input', function () {
+            if (this.value.trim() !== '') {
+                this.classList.remove('invalid');
+            }
+        });
     });
 </script>
 </body>

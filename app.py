@@ -1,4 +1,6 @@
-from flask import Flask, render_template, request, jsonify, url_for, redirect
+from functools import wraps
+
+from flask import Flask, render_template, request, jsonify, url_for, redirect, session
 import os
 from flask_sqlalchemy import SQLAlchemy
 
@@ -8,6 +10,17 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'identifier.sqlite')
 db = SQLAlchemy(app)
+
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            return redirect(url_for('admin_login'))
+
+    return decorated_function
 
 
 @app.route('/')
@@ -48,6 +61,7 @@ def admin_login():
     if request.method == 'POST':
         password = request.form['password']
         if password == '1234':
+            session['logged_in'] = True
             return redirect(url_for('admin_panel'))
         else:
             return "Incorrect password. Access denied."
@@ -55,6 +69,7 @@ def admin_login():
 
 
 @app.route('/admin-panel', methods=['GET', 'POST'])
+@login_required
 def admin_panel():
     students = Students.query.all()
 
