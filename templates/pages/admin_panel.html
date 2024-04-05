@@ -9,6 +9,7 @@
     <h2>Данные о студентах, прошедших опрос:</h2>
 
     <form method="POST">
+        <a style="color: #9D5F6C" href="{{ url_for('download_csv') }}">Скачать в формате CSV</a><br>
         <label for="group_name">Выберите группу:</label>
         <select name="group_name" id="group_name">
             <option value="All">Все</option>

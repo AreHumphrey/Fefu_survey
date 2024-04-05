@@ -1,8 +1,11 @@
+import io
 from functools import wraps
 
-from flask import Flask, render_template, request, jsonify, url_for, redirect, session
+from flask import Flask, render_template, request, jsonify, url_for, redirect, session, send_file
 import os
 from flask_sqlalchemy import SQLAlchemy
+import csv
+from flask import make_response
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -53,6 +56,7 @@ def submit_form():
                                description=description, attachment=attachment)
     db.session.add(achievement)
     db.session.commit()
+
     return jsonify({'redirect': url_for('index')})
 
 
@@ -87,6 +91,35 @@ def admin_panel():
 
     return render_template('pages/admin_panel.html', students=students, sorted_students=sorted_students,
                            group_options=group_options)
+
+
+@app.route('/download-csv', methods=['GET'])
+def download_csv():
+    students = Students.query.all()
+
+    csv_data = [["ФИО", "Группа", "Курс", "Достижения"]]
+
+    for student in students:
+        achievements = ', '.join([achievement.achievement for achievement in student.achievements])
+        csv_data.append([student.fullname, student.group_name, student.course, achievements])
+
+    return generate_csv_response(csv_data, "students_data.csv")
+
+
+def generate_csv_response(data, filename):
+    csvfile = io.StringIO()
+    csvwriter = csv.writer(csvfile, delimiter=',')
+
+    for row in data:
+        csvwriter.writerow(row)
+
+    csvfile.seek(0)
+
+    response = make_response(csvfile.read().encode('utf-8-sig'))
+    response.headers['Content-Type'] = 'text/csv; charset=utf-8'
+    response.headers['Content-Disposition'] = f'attachment; filename={filename}'
+
+    return response
 
 
 if __name__ == '__main__':

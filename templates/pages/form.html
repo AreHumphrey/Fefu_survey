@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="">
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <style>
@@ -9,6 +9,7 @@
     </style>
     <title>Форма заполнения</title>
 </head>
+
 <body>
 <div class="form-container">
     <h2 style="color: #39273F">Форма заполнения информации</h2>
@@ -59,15 +60,10 @@
                 .catch(function (error) {
                     console.error('Form submission error:', error);
                 });
+            event.preventDefault();
         }
     });
-    document.querySelectorAll('input:required, textarea:required').forEach((input) => {
-        input.addEventListener('input', function () {
-            if (this.value.trim() !== '') {
-                this.classList.remove('invalid');
-            }
-        });
-    });
+</script>
 </script>
 </body>
 </html>
